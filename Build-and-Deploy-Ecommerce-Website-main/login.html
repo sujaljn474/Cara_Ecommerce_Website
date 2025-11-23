@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Page</title>
+    <style>
+        body{
+            margin:0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to right, #f8d7e6, #fdeee6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container{
+            background: white;
+            padding: 40px;
+            width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .logo{
+            width: 120px;
+            margin-bottom: 15px;
+        }
+
+        input{
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid gray;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        button{
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #ff3f6c;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover{
+            background-color: #d9365d;
+        }
+        a{
+            color: #ff3f6c;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+        <img src="img/logo.png" class="logo" alt="Website Logo">
+
+        <h2>Login to your account</h2>
+
+        <input id="emailmob" type="text" placeholder="Email or Mobile Number" required>
+        <input id="pass" type="password" placeholder="Password" required>
+
+        <button type="button" onclick="loginUser()">Login</button>
+
+        <p>Forgot your password? <a onclick="resetPassword()">Reset here</a></p>
+        <p>Don’t have an account? <a href="signup.html">Create an account</a></p>
+        <p>Have trouble logging in? <a href="#">Get Help</a></p>
+    </div>
+
+<script>
+
+
+function isValidEmail(email){
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+}
+
+// ⭐ Validate Mobile Number (only 10 digits)
+function isValidMobile(num){
+    let mobilePattern = /^[0-9]{10}$/;
+    return mobilePattern.test(num);
+}
+
+function loginUser(){
+    let input = document.getElementById("emailmob").value.trim();
+    let pass  = document.getElementById("pass").value.trim();
+
+    if(input === "" || pass === ""){
+        alert("Please fill all fields");
+        return;
+    }
+
+    // ⭐ Check email OR mobile
+    if(!isValidEmail(input) && !isValidMobile(input)){
+        alert("Please enter a valid Email or 10-digit Mobile Number");
+        return;
+    }
+
+    // If valid → login success
+    localStorage.setItem("loggedInUser", input);
+    window.location.href = "index.html";
+}
+
+function resetPassword(){
+    let email = prompt("Enter your registered email or mobile number:");
+
+    if(email === null) return;
+
+    email = email.trim();
+
+    if(!isValidEmail(email) && !isValidMobile(email)){
+        alert("Please enter a valid Email or 10-digit Mobile Number");
+        return;
+    }
+
+    alert("A password reset link has been sent to: " + email);
+}
+
+</script>
+
+</body>
+</html>

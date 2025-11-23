@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup Page</title>
+    <style>
+        body{
+            margin:0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: linear-gradient(to right, #fdeee6, #f8d7e6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container{
+            background: white;
+            padding: 40px;
+            width: 450px;
+            border-radius: 8px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        input{
+            width: 100%;
+            padding: 12px;
+            margin: 12px 0;
+            border: 1px solid gray;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        button{
+            width: 100%;
+            padding: 12px;
+            border: none;
+            background-color: #ff3f6c;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover{
+            background-color: #d9365d;
+        }
+        a{
+            color: #ff3f6c;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <img src="img/logo.png" class="logo" alt="Website Logo">
+        <h2>Create Your Account</h2>
+
+        <input id="name" type="text" placeholder="Full Name" required>
+        <input id="email" type="text" placeholder="Email Address" required>
+        <input id="mobile" type="text" placeholder="Mobile Number" required>
+        <input id="password" type="password" placeholder="Create Password" required>
+        <input id="cpassword" type="password" placeholder="Confirm Password" required>
+
+        <button type="button" onclick="signupUser()">Signup</button>
+
+        <p>Already have an account? <a href="login.html">Login</a></p>
+    </div>
+
+<script>
+
+// ⭐ Validate Name
+function isValidName(name){
+    let pattern = /^[A-Za-z ]{3,}$/;
+    return pattern.test(name);
+}
+
+// ⭐ Validate Email
+function isValidEmail(email){
+    let pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return pattern.test(email);
+}
+
+// ⭐ Validate Mobile Number (10 digits only)
+function isValidMobile(num){
+    let pattern = /^[0-9]{10}$/;
+    return pattern.test(num);
+}
+
+// ⭐ Validate Password (minimum 6 chars)
+function isValidPassword(pass){
+    return pass.length >= 6;
+}
+
+function signupUser(){
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let mobile = document.getElementById("mobile").value.trim();
+    let pass = document.getElementById("password").value.trim();
+    let cpass = document.getElementById("cpassword").value.trim();
+
+    // Empty field check
+    if(name === "" || email === "" || mobile === "" || pass === "" || cpass === ""){
+        alert("Please fill all fields ❗");
+        return;
+    }
+
+    // Name validation
+    if(!isValidName(name)){
+        alert("Enter a valid Full Name (only letters, minimum 3 characters) ❗");
+        return;
+    }
+
+    // Email validation
+    if(!isValidEmail(email)){
+        alert("Please enter a valid Email Address ❗");
+        return;
+    }
+
+    // Mobile validation
+    if(!isValidMobile(mobile)){
+        alert("Please enter a valid 10-digit Mobile Number ❗");
+        return;
+    }
+
+    // Password validation
+    if(!isValidPassword(pass)){
+        alert("Password must be at least 6 characters long ❗");
+        return;
+    }
+
+    // Password match
+    if(pass !== cpass){
+        alert("Passwords do not match ❗");
+        return;
+    }
+
+    // Save user data
+    let userData = {
+        name: name,
+        email: email,
+        mobile: mobile,
+        password: pass
+    };
+
+    localStorage.setItem("newUser", JSON.stringify(userData));
+
+    alert("Signup Successful! Redirecting to login page...");
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

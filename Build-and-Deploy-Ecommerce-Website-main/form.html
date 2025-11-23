@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submitted Contact Details</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-light">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Contact Info</a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+
+                <div class="card shadow-lg border-0">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3 class="mb-0">Submitted Contact Details</h3>
+                    </div>
+
+                    <div class="card-body p-4">
+
+                        <div class="mb-3">
+                            <strong>Name:</strong>
+                            <p id="d-name" class="form-control bg-light"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <strong>Email:</strong>
+                            <p id="d-email" class="form-control bg-light"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <strong>Subject:</strong>
+                            <p id="d-subject" class="form-control bg-light"></p>
+                        </div>
+
+                        <div class="mb-3">
+                            <strong>Message:</strong>
+                            <p id="d-message" class="form-control bg-light" style="height:100px;"></p>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="contact.html" class="btn btn-primary px-4">Go Back</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const data = JSON.parse(localStorage.getItem("contactInfo"));
+
+        if(data){
+            document.getElementById("d-name").textContent = data.name;
+            document.getElementById("d-email").textContent = data.email;
+            document.getElementById("d-subject").textContent = data.subject;
+            document.getElementById("d-message").textContent = data.message;
+        }
+    </script>
+
+</body>
+</html>
